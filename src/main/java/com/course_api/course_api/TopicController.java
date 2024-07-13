@@ -1,5 +1,6 @@
 package com.course_api.course_api;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,12 +10,11 @@ import java.util.List;
 @RestController
 public class TopicController {
 
+    @Autowired
+    private TopicService topicService;
+
     @RequestMapping("/topics")
     public List<Topic> getAllTopics() {
-        return Arrays.asList(
-                new Topic("1", "Spring", "Spring Framework Description"),
-                new Topic("2", "Java", "Java Framework Description"),
-                new Topic("3", "JavaScript", "JavaScript Framework Description")
-        );
+        return topicService.getAllTopics();
     }
 }
