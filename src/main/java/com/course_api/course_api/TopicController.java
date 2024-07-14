@@ -1,9 +1,7 @@
 package com.course_api.course_api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,5 +23,10 @@ public class TopicController {
     @RequestMapping("/topics/{id}")
     public Topic getSpecificTopic(@PathVariable String id) {
         return topicService.getSpecificTopic(id);
+    }
+
+    @RequestMapping(value = "/topics", method = RequestMethod.POST)
+    public void addTopic(@RequestBody Topic topic) {
+        topicService.addTopic(topic);
     }
 }
