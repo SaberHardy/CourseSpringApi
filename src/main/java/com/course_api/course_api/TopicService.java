@@ -18,13 +18,13 @@ public class TopicService {
         this.topicRepository = topicRepository;
     }
 
-//    private List<Topic> topics = new ArrayList<>(
-//            Arrays.asList(
-//                    new Topic("1", "Spring", "Spring Framework Description"),
-//                    new Topic("2", "Java", "Java Framework Description"),
-//                    new Topic("3", "JavaScript", "JavaScript Framework Description")
-//            )
-//    );
+    //    private List<Topic> topics = new ArrayList<>(
+    //            Arrays.asList(
+    //                    new Topic("1", "Spring", "Spring Framework Description"),
+    //                    new Topic("2", "Java", "Java Framework Description"),
+    //                    new Topic("3", "JavaScript", "JavaScript Framework Description")
+    //            )
+    //    );
 
     public List<Topic> getAllTopics() {
         //return topics;
@@ -35,7 +35,8 @@ public class TopicService {
     }
 
     public Topic getSpecificTopic(String id) {
-        return topics.stream().filter(topic -> topic.getId().equals(id)).findFirst().get();
+        // return topics.stream().filter(topic -> topic.getId().equals(id)).findFirst().get();
+        return topicRepository.findById(id).get();
     }
 
     public void addTopic(Topic topic) {
@@ -44,15 +45,17 @@ public class TopicService {
     }
 
     public void updateTopic(Topic topic, String id) {
-        for (int i = 0; i < topics.size(); i++) {
-            Topic t = topics.get(i);
-            if (t.getId().equals(id)) {
-                topics.set(i, topic);
-            }
-        }
+        // topics.forEach(t -> {
+        //     if (t.getId().equals(id)) {
+        //         t.setName(topic.getName());
+        //         t.setDescription(topic.getDescription());
+        //     }
+        // });
+        topicRepository.save(topic);
     }
 
-    public void deleteTopic(Topic topic, String id) {
-        topics.removeIf(t -> t.getId().equals(id));
+    public void deleteTopic(String id) {
+        // topics.removeIf(t -> t.getId().equals(id));
+        topicRepository.deleteById(id);
     }
 }
